@@ -9,8 +9,3 @@ export function draw (x: i32, y: i32): void {
     store<u16>(w4.DRAW_COLORS, 0x1302);
     w4.blit(data, x, y, width, height, flags);    
 };
-
-export function drawBullet (x: i32, y: i32): void {
-    store<u16>(w4.DRAW_COLORS, 0x0003);
-    w4.rect(x, y, 2, 6);
-};
