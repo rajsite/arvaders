@@ -1,25 +1,19 @@
 import * as w4 from "./wasm4";
-import * as invaderImage from './image/invader';
-import * as playerImage from './image/player';
-import * as smileyImage from './image/smiley';
+import {imagePlayer} from './image/player';
 import * as tickImage from './image/tick';
 import * as gamepad from './gamepad';
-import * as boss from './image/boss';
-import * as bullet from './image/bullet';
-import { BulletType } from "./image/bullet";
+import * as world from "./world";
+import { ComponentType } from "./world";
+import { render } from "./systems/render";
+import { imageEnemyBullet, imagePlayerBullet } from "./image/bullet";
+import { imageInvader } from "./image/invader";
+import { imageBoss } from "./image/boss";
 
-import { Invader } from "./invader";
 
 export function update (): void {
     gamepad.update();
     tickImage.draw(0,0);
-
-    playerImage.draw(0, 160 - playerImage.height - 1);
-    smileyImage.draw(76, 76);
-    bullet.draw(20, 80, BulletType.player);
-    bullet.draw(20, 60, BulletType.enemy);
-    boss.draw(50, 50);
-    Invader.draw();
+    render();
 
     store<u16>(w4.DRAW_COLORS, 0x002);
     if (gamepad.is & w4.BUTTON_1) {
@@ -29,12 +23,61 @@ export function update (): void {
 }
 
 export function start (): void {
-    Invader.count = 4;
-    for (let i =0; i< Invader.count; i++) {
-        Invader.invaders[i].x = i * invaderImage.width + 4 * i;
-    }
     store<u32>(w4.PALETTE, 0x000000, 0 * sizeof<u32>());
     store<u32>(w4.PALETTE, 0xffffff, 1 * sizeof<u32>());
     store<u32>(w4.PALETTE, 0xff0000, 2 * sizeof<u32>());
     store<u32>(w4.PALETTE, 0x00ff00, 3 * sizeof<u32>());
+
+    world.resetEntities(5);
+
+    const player = world.allocateEntity(
+        ComponentType.player |
+        ComponentType.position |
+        ComponentType.visual
+    );
+    player.position!.width = imagePlayer.width;
+    player.position!.height = imagePlayer.height;
+    player.position!.x = 0;
+    player.position!.y = 160 - player.position!.height;
+    player.visual!.image = imagePlayer;
+
+    const bulletPlayer = world.allocateEntity(
+        ComponentType.position |
+        ComponentType.visual
+    );
+    bulletPlayer.position!.width = imagePlayerBullet.width;
+    bulletPlayer.position!.height = imagePlayerBullet.height;
+    bulletPlayer.position!.x = 15;
+    bulletPlayer.position!.y = 100;
+    bulletPlayer.visual!.image = imagePlayerBullet;
+
+    const bulletEnemy = world.allocateEntity(
+        ComponentType.position |
+        ComponentType.visual
+    );
+    bulletEnemy.position!.width = imageEnemyBullet.width;
+    bulletEnemy.position!.height = imageEnemyBullet.height;
+    bulletEnemy.position!.x = 15;
+    bulletEnemy.position!.y = 60;
+    bulletEnemy.visual!.image = imageEnemyBullet;
+
+    const enemy = world.allocateEntity(
+        ComponentType.position |
+        ComponentType.visual
+    );
+    enemy.position!.width = imageInvader.width;
+    enemy.position!.height = imageInvader.height;
+    enemy.position!.x = 0;
+    enemy.position!.y = 0;
+    enemy.visual!.image = imageInvader;
+
+    const boss = world.allocateEntity(
+        ComponentType.position |
+        ComponentType.visual
+    );
+    boss.position!.width = imageBoss.width;
+    boss.position!.height = imageBoss.height;
+    boss.position!.x = 80;
+    boss.position!.y = 0;
+    boss.visual!.image = imageBoss;
 }
