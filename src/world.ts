@@ -4,7 +4,7 @@ import { Position } from "./components/position";
 import { Visual } from "./components/visual";
 import { Entity } from "./entity";
 
-const poolCapacity = 50;
+const poolCapacity = 150;
 
 export enum ComponentType {
     health = 1,
