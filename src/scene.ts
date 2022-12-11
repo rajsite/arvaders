@@ -1,8 +1,8 @@
-import * as w4 from "./wasm4";
-import { ComponentType } from "./world";
-import * as world from "./world";
+import * as w4 from './wasm4';
+import { ComponentType } from './world';
+import * as world from './world';
 import * as images from './images';
-import * as systems from "./systems";
+import * as systems from './systems';
 
 enum Scene {
     init,
@@ -50,6 +50,8 @@ function level_1_setup(): Scene {
     player.position!.height = images.player.height;
     player.position!.x = 0;
     player.position!.y = 160 - player.position!.height;
+    player.position!.vx = 5;
+    player.position!.vy = 0;
     player.visual!.image = images.player;
 
     const bulletPlayer = world.allocateEntity(
@@ -95,12 +97,13 @@ function level_1_setup(): Scene {
 }
 
 function level_1(): Scene {
+    systems.movePlayer();
     systems.render();
     return Scene.level_1;
 }
 
 function error(): Scene {
     store<u16>(w4.DRAW_COLORS, 0x002);
-    w4.text("Error :(", 16, 90);
+    w4.text('Error :(', 16, 90);
     return Scene.error;
 }
