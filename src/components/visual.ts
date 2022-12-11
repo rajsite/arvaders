@@ -1,4 +1,4 @@
-import { Image } from "../image/image";
+import { Image } from "../images/image";
 
 export class Visual {
     static init (visual: Visual): void {

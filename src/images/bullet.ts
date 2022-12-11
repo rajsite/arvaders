@@ -1,7 +1,7 @@
 import * as w4 from "../wasm4";
 import { Image } from "./image";
 
-class ImagePlayerBullet implements Image {
+class PlayerBulletImage implements Image {
     width: i32 = 2;
     height: i32 = 6;
     draw (x: i32, y: i32): void {
@@ -10,7 +10,7 @@ class ImagePlayerBullet implements Image {
     }
 }
 
-class ImageEnemyBullet implements Image {
+class EnemyBulletImage implements Image {
     width: i32 = 2;
     height: i32 = 6;
     draw (x: i32, y: i32): void {
@@ -19,5 +19,5 @@ class ImageEnemyBullet implements Image {
     }
 }
 
-export const imagePlayerBullet = new ImagePlayerBullet();
-export const imageEnemyBullet = new ImageEnemyBullet();
+export const playerBullet = new PlayerBulletImage();
+export const enemyBullet = new EnemyBulletImage();

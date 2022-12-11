@@ -1,7 +1,7 @@
-import { Position } from "./components/position";
-import { Player } from "./components/player";
-import { Health } from "./components/health";
-import { Visual } from "./components/visual";
+import { Position } from "./position";
+import { Player } from "./player";
+import { Health } from "./health";
+import { Visual } from "./visual";
 
 export class Entity {
     static init (entity: Entity): void {

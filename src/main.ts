@@ -1,5 +1,5 @@
 import * as w4 from "./wasm4";
-import * as tickImage from './image/tick';
+import * as tickImage from './images/tick';
 import * as gamepad from './gamepad';
 import { run } from './scene';
 

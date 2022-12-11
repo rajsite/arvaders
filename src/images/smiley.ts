@@ -13,7 +13,7 @@ const data = memory.data<u8>([
     0b11000011,
 ]);
 
-class ImageSmiley implements Image {
+class SmileyImage implements Image {
     width: i32 = 8;
     height: i32 = 8;
     draw (x: i32, y: i32): void {
@@ -22,4 +22,4 @@ class ImageSmiley implements Image {
     }
 }
 
-export const imageSmiley = new ImageSmiley();
+export const smiley = new SmileyImage();

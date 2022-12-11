@@ -2,7 +2,7 @@ import { Health } from "./components/health";
 import { Player } from "./components/player";
 import { Position } from "./components/position";
 import { Visual } from "./components/visual";
-import { Entity } from "./entity";
+import { Entity } from "./components/entity";
 
 const poolCapacity = 150;
 
