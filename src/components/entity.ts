@@ -4,6 +4,9 @@ import { Health } from "./health";
 import { Visual } from "./visual";
 
 export class Entity {
+    static new (): Entity {
+        return new Entity();
+    }
     static init (entity: Entity): void {
         entity.components = 0;
         entity.health = null;

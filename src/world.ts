@@ -1,8 +1,5 @@
-import { Health } from "./components/health";
-import { Player } from "./components/player";
-import { Position } from "./components/position";
-import { Visual } from "./components/visual";
-import { Entity } from "./components/entity";
+import { Entity } from './components/entity';
+import {Health, Player, Position, Visual} from './components';
 
 const poolCapacity = 150;
 
@@ -23,11 +20,11 @@ class Pool {
 export const pool = new Pool();
 
 for (let i = 0; i < poolCapacity; i++ ){
-    pool.entity[i] = new Entity();
-    pool.health[i] = new Health();
-    pool.player[i] = new Player();
-    pool.position[i] = new Position();
-    pool.visual[i] = new Visual();
+    pool.entity[i] = Entity.new();
+    pool.health[i] = Health.new();
+    pool.player[i] = Player.new();
+    pool.position[i] = Position.new();
+    pool.visual[i] = Visual.new();
 }
 
 // World state
