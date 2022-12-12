@@ -1,7 +1,6 @@
 import { Entity } from './components/entity';
 import {Health, Player, Position, Visual} from './components';
-
-const poolCapacity = 150;
+import { Pool } from './utilities/pool';
 
 export enum ComponentType {
     health = 1,
@@ -10,82 +9,59 @@ export enum ComponentType {
     visual = 8
 }
 
-class Pool {
-    entity: Entity[] = new Array(poolCapacity);
-    health: Health[] = new Array(poolCapacity);
-    player: Player[] = new Array(poolCapacity);
-    position: Position[] = new Array(poolCapacity);
-    visual: Visual[] = new Array(poolCapacity);
-}
-export const pool = new Pool();
-
-for (let i = 0; i < poolCapacity; i++ ){
-    pool.entity[i] = Entity.new();
-    pool.health[i] = Health.new();
-    pool.player[i] = Player.new();
-    pool.position[i] = Position.new();
-    pool.visual[i] = Visual.new();
-}
-
-// World state
-let entitiesCapacity = 0;
-let entitiesAllocated = 0
+const entityPool = new Pool<Entity>(Entity.new, Entity.init);
+const healthPool = new Pool<Health>(Health.new, Health.init);
+const playerPool = new Pool<Player>(Player.new, Player.init);
+const positionPool = new Pool<Position>(Position.new, Position.init);
+const visualPool = new Pool<Visual>(Visual.new, Visual.init);
 
 export function resetEntities (capacity: i32): void {
-    entitiesCapacity = capacity;
-    entitiesAllocated = 0;
-    for (let i = 0; i < entitiesCapacity; i++) {
-        const entity = pool.entity[i];
-        Entity.init(entity);
-    }
+    entityPool.reset(capacity);
+    healthPool.reset(capacity);
+    playerPool.reset(capacity);
+    positionPool.reset(capacity);
+    visualPool.reset(capacity);
 }
 
 export function allocateEntity (components: i32): Entity {
-    const nextIndex = entitiesAllocated;
-    entitiesAllocated++;
-
-    const entity = pool.entity[nextIndex];
+    const entity = entityPool.allocate();
     entity.components = components;
     if (components & ComponentType.health) {
-        entity.health = pool.health[nextIndex];
-        Health.init(entity.health!);
+        entity.health = healthPool.allocate();
     }
 
     if (components & ComponentType.player) {
-        entity.player = pool.player[nextIndex];
-        Player.init(entity.player!);
+        entity.player = playerPool.allocate();
     }
 
     if (components & ComponentType.position) {
-        entity.position = pool.position[nextIndex];
-        Position.init(entity.position!);
+        entity.position = positionPool.allocate();
     }
 
     if (components & ComponentType.visual) {
-        entity.visual = pool.visual[nextIndex];
-        Visual.init(entity.visual!);
+        entity.visual = visualPool.allocate();
     }
 
     return entity;
 }
 
 class Matches {
-    entities: Entity[] = new Array(poolCapacity);
+    entities: Entity[] = new Array(Pool.MAX_CAPACITY);
     count: i32 = 0;
 }
 export const matches = new Matches();
 
 export function entitiesAll(): void {
-    matches.count = entitiesAllocated;
-    for (let i = 0; i < entitiesAllocated; i++) {
-        matches.entities[i] = pool.entity[i];
+    matches.count = entityPool.allocated;
+    for (let i = 0; i < entityPool.allocated; i++) {
+        matches.entities[i] = entityPool.instances[i]!;
     }
 }
 
 export function entitiesWith (components: i32): void {
     matches.count = 0;
-    for (let i = 0; i < entitiesAllocated; i++) {
-        const entity = pool.entity[i];
+    for (let i = 0; i < entityPool.allocated; i++) {
+        const entity = entityPool.instances[i]!;
         if ((entity.components & components) === components) {
             matches.entities[matches.count] = entity;
             matches.count++;
