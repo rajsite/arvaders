@@ -5,6 +5,8 @@ import * as images from '../images';
 import * as systems from '../systems';
 import { gamepadMovement } from '../movement/gamepad';
 import { initializeVisualPosition } from './initializers';
+import * as w4 from "../wasm4";
+import { sideToSideMovement } from '../movement/sideToSideside';
 
 export function level_1_setup(): Scene {
     world.resetEntities(5);
@@ -16,8 +18,8 @@ export function level_1_setup(): Scene {
     );
     initializeVisualPosition(player, images.player);
     player.position!.x = 0;
-    player.position!.y = 160 - player.position!.height;
-    player.position!.vx = 5;
+    player.position!.y = w4.SCREEN_SIZE - player.position!.height;
+    player.position!.vx = 8;
     player.position!.vy = 0;
     player.position!.movement = gamepadMovement;
 
@@ -28,6 +30,8 @@ export function level_1_setup(): Scene {
     initializeVisualPosition(enemy, images.invader);
     enemy.position!.x = 0;
     enemy.position!.y = 0;
+    enemy.position!.vx = 2;
+    enemy.position!.movement = sideToSideMovement;
     return Scene.level_1_game;
 }
 
