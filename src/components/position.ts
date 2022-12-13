@@ -1,3 +1,5 @@
+import { Movement } from "../movement/movement";
+
 export class Position {
     static new (): Position {
         return new Position();
@@ -9,6 +11,7 @@ export class Position {
         position.height = 0;
         position.vx = 0;
         position.vy = 0;
+        position.movement = null;
     }
     x: i32;
     y: i32;
@@ -16,4 +19,5 @@ export class Position {
     height: i32;
     vx: i32;
     vy: i32;
+    movement: Movement | null;
 }

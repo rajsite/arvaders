@@ -1,2 +1,2 @@
-export * from './movePlayer';
+export * from './move';
 export * from './render';
