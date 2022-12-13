@@ -13,9 +13,12 @@ const data = memory.data<u8>([
     0b11000011,
 ]);
 
-class SmileyImage implements Image {
-    width: i32 = 8;
-    height: i32 = 8;
+class SmileyImage extends Image {
+    constructor () {
+        super();
+        this.width = 8;
+        this.height = 8;
+    }
     draw (x: i32, y: i32): void {
         store<u16>(w4.DRAW_COLORS, 0x0002);
         w4.blit(data, x, y, this.width, this.height, flags);    
