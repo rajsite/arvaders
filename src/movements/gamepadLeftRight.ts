@@ -1,5 +1,5 @@
 import { Entity } from "../entity";
-import * as gamepad from '../gamepad';
+import * as gamepad from '../utilities/gamepad';
 import * as w4 from "../wasm4";
 import { Movement } from "./types";
 

@@ -1,4 +1,4 @@
-import * as w4 from "./wasm4";
+import * as w4 from "../wasm4";
 
 export let was: u8;
 export let is: u8 = load<u8>(w4.GAMEPAD1);
