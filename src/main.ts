@@ -1,11 +1,11 @@
 import * as w4 from "./wasm4";
-import * as tickImage from './images/tick';
+import { tick} from './utilities/tick';
 import * as gamepad from './gamepad';
 import { run } from './scenes/runner';
 
 export function update (): void {
     gamepad.update();
-    tickImage.draw(0,0);
+    tick(0,0);
 
     run();
 

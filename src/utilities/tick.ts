@@ -1,7 +1,7 @@
 import * as w4 from "../wasm4";
 
 let count = 0;
-export function draw (x: i32, y: i32): void {
+export function tick (x: i32, y: i32): void {
     count++;
     const scaledCount: i32 = count/20;
     const show: bool = scaledCount % 2 === 0;
