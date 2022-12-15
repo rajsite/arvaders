@@ -3,10 +3,9 @@ import { ComponentType } from '../components/entity';
 import * as world from '../world';
 import * as images from '../images';
 import * as systems from '../systems';
-import { gamepadMovement } from '../movement/gamepad';
+import * as movements from '../movements';
 import { initializeVisualPosition } from './initializers';
 import * as w4 from "../wasm4";
-import { sideToSideMovement } from '../movement/sideToSideside';
 
 export function level_1_setup(): Scene {
     world.resetEntities(5);
@@ -21,7 +20,7 @@ export function level_1_setup(): Scene {
     player.position!.y = w4.SCREEN_SIZE - player.position!.height;
     player.position!.vx = 8;
     player.position!.vy = 0;
-    player.position!.movement = gamepadMovement;
+    player.position!.movement = movements.gamepadLeftRight;
 
     const enemy = world.allocateEntity(
         ComponentType.position |
@@ -31,7 +30,7 @@ export function level_1_setup(): Scene {
     enemy.position!.x = 0;
     enemy.position!.y = 0;
     enemy.position!.vx = 2;
-    enemy.position!.movement = sideToSideMovement;
+    enemy.position!.movement = movements.sideToSide;
     return Scene.level_1_game;
 }
 

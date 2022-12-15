@@ -3,7 +3,7 @@ import * as gamepad from '../gamepad';
 import * as w4 from "../wasm4";
 import { Movement } from "./movement";
 
-export const gamepadMovement: Movement = (entity: Entity): void => {
+export const gamepadLeftRight: Movement = (entity: Entity): void => {
     if (gamepad.is & w4.BUTTON_RIGHT) {
         entity.position!.x = i32(Math.min(
             entity.position!.x + entity.position!.vx,
