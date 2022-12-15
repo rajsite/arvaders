@@ -14,6 +14,7 @@ const visualPool = new Pool<Visual>(MAX_CAPACITY, Visual.create, Visual.reset);
 
 // Pre-allocate the max possible set of entities and components
 resetEntities(MAX_CAPACITY);
+resetEntities(0);
 
 export const query = new Query(entityPool);
 
@@ -46,4 +47,3 @@ export function allocateEntity (components: ComponentType): Entity {
 
     return entity;
 }
-
