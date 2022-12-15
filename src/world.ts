@@ -1,19 +1,20 @@
-import { Entity } from './components/entity';
+import { Entity, ComponentType } from './components/entity';
 import {Health, Player, Position, Visual} from './components';
 import { Pool } from './utilities/pool';
+import { Query } from './query';
 
-export enum ComponentType {
-    health = 1,
-    player = 2,
-    position = 4,
-    visual = 8
-}
+const MAX_CAPACITY = 200;
 
-const entityPool = new Pool<Entity>(Entity.new, Entity.init);
-const healthPool = new Pool<Health>(Health.new, Health.init);
-const playerPool = new Pool<Player>(Player.new, Player.init);
-const positionPool = new Pool<Position>(Position.new, Position.init);
-const visualPool = new Pool<Visual>(Visual.new, Visual.init);
+const entityPool = new Pool<Entity>(MAX_CAPACITY, Entity.create, Entity.reset);
+const healthPool = new Pool<Health>(MAX_CAPACITY, Health.create, Health.reset);
+const playerPool = new Pool<Player>(MAX_CAPACITY, Player.create, Player.reset);
+const positionPool = new Pool<Position>(MAX_CAPACITY, Position.create, Position.reset);
+const visualPool = new Pool<Visual>(MAX_CAPACITY, Visual.create, Visual.reset);
+
+// Pre-allocate the max possible set of entities and components
+resetEntities(MAX_CAPACITY);
+
+export const query = new Query(entityPool);
 
 export function resetEntities (capacity: i32): void {
     entityPool.reset(capacity);
@@ -23,7 +24,7 @@ export function resetEntities (capacity: i32): void {
     visualPool.reset(capacity);
 }
 
-export function allocateEntity (components: i32): Entity {
+export function allocateEntity (components: ComponentType): Entity {
     const entity = entityPool.allocate();
     entity.components = components;
     if (components & ComponentType.health) {
@@ -45,26 +46,3 @@ export function allocateEntity (components: i32): Entity {
     return entity;
 }
 
-class Matches {
-    entities: Entity[] = new Array(Pool.MAX_CAPACITY);
-    count: i32 = 0;
-}
-export const matches = new Matches();
-
-export function entitiesAll(): void {
-    matches.count = entityPool.allocated;
-    for (let i = 0; i < entityPool.allocated; i++) {
-        matches.entities[i] = entityPool.instances[i]!;
-    }
-}
-
-export function entitiesWith (components: i32): void {
-    matches.count = 0;
-    for (let i = 0; i < entityPool.allocated; i++) {
-        const entity = entityPool.instances[i]!;
-        if ((entity.components & components) === components) {
-            matches.entities[matches.count] = entity;
-            matches.count++;
-        }
-    }
-}

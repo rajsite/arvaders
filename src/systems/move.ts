@@ -1,9 +1,10 @@
-import { ComponentType, entitiesWith, matches } from "../world";
+import { query } from "../world";
+import { ComponentType } from "../components/entity";
 
 export function move(): void {
-    entitiesWith(ComponentType.position);
-    for (let i = 0; i < matches.count; i++) {
-        const entity = matches.entities[i];
+    query.entitiesWith(ComponentType.position);
+    for (let i = 0; i < query.count; i++) {
+        const entity = query.matches[i];
         const movement = entity.position!.movement;
         if (movement) {
             movement(entity);

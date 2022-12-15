@@ -1,7 +1,7 @@
 export class Player {
-    static new (): Player {
+    static create (): Player {
         return new Player();
     }
-    static init (player: Player): void {
+    static reset (player: Player): void {
     }
 }

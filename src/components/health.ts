@@ -1,8 +1,8 @@
 export class Health {
-    static new (): Health {
+    static create (): Health {
         return new Health();
     }
-    static init (health: Health): void {
+    static reset (health: Health): void {
         health.health = 0;
     }
     health: i32;

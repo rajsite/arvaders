@@ -1,9 +1,10 @@
-import { ComponentType, entitiesWith, matches } from "../world";
+import { query } from "../world";
+import { ComponentType } from "../components/entity";
 
 export function render(): void {
-    entitiesWith(ComponentType.visual);
-    for (let i = 0; i < matches.count; i++) {
-        const entity = matches.entities[i];
+    query.entitiesWith(ComponentType.visual);
+    for (let i = 0; i < query.count; i++) {
+        const entity = query.matches[i];
         entity.visual!.image!.draw(
             entity.position!.x,
             entity.position!.y,

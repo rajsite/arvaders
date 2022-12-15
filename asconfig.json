@@ -4,7 +4,7 @@
   ],
   "options": {
     "outFile": "build/cart.wasm",
-    "runtime": "incremental",
+    "runtime": "stub",
     "importMemory": true,
     "initialMemory": 1,
     "maximumMemory": 1,

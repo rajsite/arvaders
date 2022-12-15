@@ -1,10 +1,10 @@
 import { Movement } from "../movement/movement";
 
 export class Position {
-    static new (): Position {
+    static create (): Position {
         return new Position();
     }
-    static init (position: Position): void {
+    static reset (position: Position): void {
         position.x = 0;
         position.y = 0;
         position.width = 0;

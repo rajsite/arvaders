@@ -1,5 +1,5 @@
 import { Scene } from './scene';
-import { ComponentType } from '../world';
+import { ComponentType } from '../components/entity';
 import * as world from '../world';
 import * as images from '../images';
 import * as systems from '../systems';
