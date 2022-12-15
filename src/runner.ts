@@ -3,7 +3,7 @@ import * as scenes from './scenes';
 
 let scene: Scene = Scene.init;
 
-export function run(): void {
+export function runScene(): void {
     scene = execute();
 }
 
