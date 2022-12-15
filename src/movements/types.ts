@@ -1,3 +1,3 @@
-import { Entity } from "../components/entity";
+import { Entity } from "../entity";
 
 export type Movement = (entity: Entity) => void;

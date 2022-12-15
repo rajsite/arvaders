@@ -1,4 +1,4 @@
-import { Movement } from "../movements/movement";
+import { Movement } from "../movements/types";
 
 export class Position {
     static create (): Position {

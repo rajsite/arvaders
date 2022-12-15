@@ -1,7 +1,7 @@
 import * as w4 from "../wasm4";
-import { Image } from "./image";
+import { Image } from "./types";
 
-class PlayerBulletImage extends Image {
+class PlayerBullet extends Image {
     constructor () {
         super();
         this.width = 2;
@@ -13,7 +13,7 @@ class PlayerBulletImage extends Image {
     }
 }
 
-class EnemyBulletImage extends Image {
+class EnemyBullet extends Image {
     constructor () {
         super();
         this.width = 2;
@@ -25,5 +25,5 @@ class EnemyBulletImage extends Image {
     }
 }
 
-export const playerBullet = new PlayerBulletImage();
-export const enemyBullet = new EnemyBulletImage();
+export const playerBullet = new PlayerBullet();
+export const enemyBullet = new EnemyBullet();

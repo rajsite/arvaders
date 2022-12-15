@@ -1,5 +1,5 @@
 import * as w4 from "../wasm4";
-import { Image } from "./image";
+import { Image } from "./types";
 
 const flags = w4.BLIT_1BPP;
 const data = memory.data<u8>([
@@ -13,7 +13,7 @@ const data = memory.data<u8>([
     0b11000011,
 ]);
 
-class SmileyImage extends Image {
+class Smiley extends Image {
     constructor () {
         super();
         this.width = 8;
@@ -25,4 +25,4 @@ class SmileyImage extends Image {
     }
 }
 
-export const smiley = new SmileyImage();
+export const smiley = new Smiley();

@@ -1,5 +1,5 @@
 import * as w4 from '../wasm4';
-import { Scene } from './scene';
+import { Scene } from './types';
 
 export function init(): Scene {
     store<u32>(w4.PALETTE, 0x000000, 0 * sizeof<u32>());

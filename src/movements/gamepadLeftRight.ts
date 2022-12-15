@@ -1,7 +1,7 @@
-import { Entity } from "../components/entity";
+import { Entity } from "../entity";
 import * as gamepad from '../gamepad';
 import * as w4 from "../wasm4";
-import { Movement } from "./movement";
+import { Movement } from "./types";
 
 export const gamepadLeftRight: Movement = (entity: Entity): void => {
     if (gamepad.is & w4.BUTTON_RIGHT) {

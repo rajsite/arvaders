@@ -1,7 +1,7 @@
 import * as w4 from "./wasm4";
 import { tick} from './utilities/tick';
 import * as gamepad from './gamepad';
-import { run } from './scenes/runner';
+import { run } from './runner';
 
 export function update (): void {
     gamepad.update();

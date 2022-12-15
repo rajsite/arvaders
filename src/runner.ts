@@ -1,5 +1,5 @@
-import { Scene } from './scene';
-import * as scenes from './';
+import { Scene } from './scenes/types';
+import * as scenes from './scenes';
 
 let scene: Scene = Scene.init;
 

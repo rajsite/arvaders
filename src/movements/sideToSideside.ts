@@ -1,6 +1,6 @@
-import { Entity } from "../components/entity";
+import { Entity } from "../entity";
 import * as w4 from "../wasm4";
-import { Movement } from "./movement";
+import { Movement } from "./types";
 
 export const sideToSide: Movement = (entity: Entity): void => {
     if (entity.position!.vx > 0) {

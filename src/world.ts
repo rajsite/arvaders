@@ -1,4 +1,5 @@
-import { Entity, ComponentType } from './components/entity';
+import { Entity } from './entity';
+import { ComponentType } from "./components/types";
 import {Health, Player, Position, Visual} from './components';
 import { Pool } from './utilities/pool';
 import { Query } from './query';

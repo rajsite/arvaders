@@ -1,14 +1,5 @@
-import { Position } from "./position";
-import { Player } from "./player";
-import { Health } from "./health";
-import { Visual } from "./visual";
-
-export enum ComponentType {
-    health = 1 << 0,
-    player = 1 << 1,
-    position = 1 << 2,
-    visual = 1 << 3
-}
+import { Health, Player, Position, Visual } from './components';
+import { ComponentType } from "./components/types";
 
 export class Entity {
     static create (): Entity {

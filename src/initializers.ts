@@ -1,5 +1,5 @@
-import { Entity } from "../components/entity";
-import { Image } from "../images/image";
+import { Entity } from "./entity";
+import { Image } from "./images/types";
 
 export function initializeVisualPosition (entity: Entity, image: Image): void {
     entity.position!.width = image.width;

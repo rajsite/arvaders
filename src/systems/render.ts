@@ -1,5 +1,5 @@
 import { query } from "../world";
-import { ComponentType } from "../components/entity";
+import { ComponentType } from "../components/types";
 
 export function render(): void {
     query.entitiesWith(ComponentType.visual);

@@ -1,4 +1,5 @@
-import { ComponentType, Entity } from "./components/entity";
+import { Entity } from "./entity";
+import { ComponentType } from "./components/types";
 import { Pool } from "./utilities/pool";
 
 export class Query {

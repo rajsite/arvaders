@@ -1,5 +1,5 @@
 import { query } from "../world";
-import { ComponentType } from "../components/entity";
+import { ComponentType } from "../components/types";
 
 export function move(): void {
     query.entitiesWith(ComponentType.position);

@@ -1,10 +1,10 @@
-import { Scene } from './scene';
-import { ComponentType } from '../components/entity';
+import { Scene } from './types';
+import { ComponentType } from "../components/types";
 import * as world from '../world';
 import * as images from '../images';
 import * as systems from '../systems';
 import * as movements from '../movements';
-import { initializeVisualPosition } from './initializers';
+import { initializeVisualPosition } from '../initializers';
 import * as w4 from "../wasm4";
 
 export function level_1_setup(): Scene {
