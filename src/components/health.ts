@@ -3,7 +3,11 @@ export class Health {
         return new Health();
     }
     static reset (health: Health): void {
-        health.health = 0;
+        health.value = 0;
     }
-    health: i32;
+    value: i32;
+
+    isAlive (): boolean {
+        return this.value > 0;
+    }
 }

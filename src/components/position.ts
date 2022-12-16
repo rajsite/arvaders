@@ -20,4 +20,12 @@ export class Position {
     vx: i32;
     vy: i32;
     movement: Movement | null;
+
+    // Nice visual https://silentmatt.com/rectangle-intersection/
+    intersects (that: Position): boolean {
+        return (this.x               < that.x + that.width)
+            && (this.x + this.width  > that.x)
+            && (this.y               < that.y + that.height)
+            && (this.y + this.height > that.y);
+    }
 }

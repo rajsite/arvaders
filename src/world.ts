@@ -18,6 +18,7 @@ resetEntities(MAX_CAPACITY);
 resetEntities(0);
 
 export const query = new Query(entityPool);
+export const query2 = new Query(entityPool);
 
 export function resetEntities (capacity: i32): void {
     entityPool.reset(capacity);

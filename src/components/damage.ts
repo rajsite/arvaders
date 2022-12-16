@@ -3,7 +3,7 @@ export class Damage {
         return new Damage();
     }
     static reset (damage: Damage): void {
-        damage.damage = 0;
+        damage.value = 0;
     }
-    damage: i32;
+    value: i32;
 }

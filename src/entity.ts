@@ -6,6 +6,7 @@ export class Entity {
         return new Entity();
     }
     static reset (entity: Entity): void {
+        entity.exists = true;
         entity.components = 0;
         entity.damage = null;
         entity.health = null;
@@ -13,6 +14,7 @@ export class Entity {
         entity.position = null;
         entity.visual = null;
     }
+    exists: boolean = true;
     components: ComponentType;
     damage: Damage | null;
     health: Health | null;
