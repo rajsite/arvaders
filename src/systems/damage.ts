@@ -15,7 +15,7 @@ export function damage(): void {
     for (let i = 0; i < damageEntities.count; i++) {
         const damageEntity = damageEntities.matches[i];
         for (let j = 0; j < hurtEntities.count; j++) {
-            const hurtEntity = hurtEntities.matches[i];
+            const hurtEntity = hurtEntities.matches[j];
             if (
                 damageEntity.position!.intersects(hurtEntity.position!)
             ) {
