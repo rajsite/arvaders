@@ -1,12 +1,13 @@
 import { Entity } from './entity';
 import { ComponentType } from "./components/types";
-import {Health, Player, Position, Visual} from './components';
+import {Damage, Health, Player, Position, Visual} from './components';
 import { Pool } from './utilities/pool';
 import { Query } from './query';
 
 const MAX_CAPACITY = 200;
 
 const entityPool = new Pool<Entity>(MAX_CAPACITY, Entity.create, Entity.reset);
+const damagePool = new Pool<Damage>(MAX_CAPACITY, Damage.create, Damage.reset);
 const healthPool = new Pool<Health>(MAX_CAPACITY, Health.create, Health.reset);
 const playerPool = new Pool<Player>(MAX_CAPACITY, Player.create, Player.reset);
 const positionPool = new Pool<Position>(MAX_CAPACITY, Position.create, Position.reset);
@@ -20,6 +21,7 @@ export const query = new Query(entityPool);
 
 export function resetEntities (capacity: i32): void {
     entityPool.reset(capacity);
+    damagePool.reset(capacity);
     healthPool.reset(capacity);
     playerPool.reset(capacity);
     positionPool.reset(capacity);
@@ -29,6 +31,10 @@ export function resetEntities (capacity: i32): void {
 export function allocateEntity (components: ComponentType): Entity {
     const entity = entityPool.allocate();
     entity.components = components;
+    if (components & ComponentType.damage) {
+        entity.damage = damagePool.allocate();
+    }
+
     if (components & ComponentType.health) {
         entity.health = healthPool.allocate();
     }

@@ -1,6 +1,7 @@
 export enum ComponentType {
-    health = 1 << 0,
-    player = 1 << 1,
-    position = 1 << 2,
-    visual = 1 << 3
+    damage = 1 << 0,
+    health = 1 << 1,
+    player = 1 << 2,
+    position = 1 << 3,
+    visual = 1 << 4
 }
