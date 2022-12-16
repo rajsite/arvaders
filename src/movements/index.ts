@@ -1,2 +1,3 @@
 export * from './gamepadLeftRight';
-export * from './sideToSideside';
+export * from './sideToSide';
+export * from './forwardToAstral';

@@ -40,9 +40,11 @@ export function level_1_setup(): Scene {
         ComponentType.damage
     );
     initializeVisualPosition(bullet, images.enemyBullet);
-    bullet.position!.x = 50;
-    bullet.position!.y = w4.SCREEN_SIZE - player.position!.height;
+    bullet.position!.x = 0;
+    bullet.position!.y = 20;
     bullet.position!.vx = 0;
+    bullet.position!.vy = 2;
+    bullet.position!.movement = movements.forwardToAstral;
     bullet.damage!.value = 10;
 
     return Scene.level_1_game;
