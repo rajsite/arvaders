@@ -1,9 +1,8 @@
-export enum Scene {
-    init,
-    level_1_setup,
-    level_1_game,
-    level_1_outro,
-    win,
-    lose,
-    error
+export abstract class Scene {
+    constructor(
+        public readonly name: string,
+        public readonly renders: boolean
+    ) {}
+
+    abstract run (): Scene;
 }
