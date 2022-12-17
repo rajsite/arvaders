@@ -6,14 +6,11 @@ import * as movements from '../movements';
 import { initializeVisualPosition } from '../initializers';
 import * as w4 from "../wasm4";
 import { Condition } from '../systems';
-import * as scenes from './';
+import * as scenes from '.';
 import { Scene } from "./types";
+import * as gamepad from '../utilities/gamepad';
 
-class Level1Setup extends Scene {
-    constructor() {
-        super('level_1_setup', false);
-    }
-
+class Level1Start extends Scene {
     run(): Scene {
         world.resetEntities(5);
 
@@ -61,42 +58,35 @@ class Level1Setup extends Scene {
             bullet.position!.vy = -2;
         }
     
-        return scenes.level_1_game;
+        return scenes.level1Update;
     }
 }
-export const level_1_setup = new Level1Setup();
+export const level1Start = new Level1Start('level1Start', false);
 
-class Level1Game extends Scene {
-    constructor() {
-        super('level_1_game', true);
-    }
-
+class Level1Update extends Scene {
     run(): Scene {
+        gamepad.update();
         systems.damage();
         systems.move();
         systems.playerFire();
         systems.render();
         const condition = systems.condition();
         if (condition === Condition.win) {
-            return scenes.level_1_outro;
+            return scenes.level1End;
         } else if (condition === Condition.lose) {
             return scenes.lose;
         }
-        return scenes.level_1_game;
+        return scenes.level1Update;
     }
 }
 
-export const level_1_game = new Level1Game();
+export const level1Update = new Level1Update('level1Update', true);
 
-class Level1Outro extends Scene {
-    constructor() {
-        super('level_1_outro', false);
-    }
-
+class Level1End extends Scene {
     run(): Scene {
-        w4.trace('level one outro');
+        w4.trace(this.name);
         return scenes.win;
     }
 }
 
-export const level_1_outro = new Level1Outro();
+export const level1End = new Level1End('level1End', false);

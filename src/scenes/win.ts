@@ -3,14 +3,10 @@ import * as scenes from './';
 import { Scene } from "./types";
 
 class Win extends Scene {
-    constructor() {
-        super('win', false);
-    }
-
     run(): Scene {
-        trace('win');
-        return scenes.level_1_setup;
+        trace(this.name);
+        return scenes.level1Start;
     }
 }
 
-export const win = new Win();
+export const win = new Win('win', false);
