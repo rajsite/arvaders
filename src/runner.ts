@@ -15,6 +15,12 @@ function execute(): Scene {
             return scenes.level_1_setup();
         case Scene.level_1_game:
             return scenes.level_1_game();
+        case Scene.level_1_outro:
+            return scenes.level_1_outro();
+        case Scene.win:
+            return scenes.win();
+        case Scene.lose:
+            return scenes.lose();
         case Scene.error:
             return scenes.error();
     }

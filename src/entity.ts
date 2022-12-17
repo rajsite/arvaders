@@ -1,4 +1,4 @@
-import { Bullet, Damage, Health, Player, Position, Ship, Visual } from './components';
+import { Bullet, Damage, Enemy, Health, Player, Position, Ship, Visual } from './components';
 import { ComponentType } from "./components/types";
 
 export class Entity {
@@ -10,6 +10,7 @@ export class Entity {
         entity.components = 0;
         entity.bullet = null;
         entity.damage = null;
+        entity.enemy = null;
         entity.health = null;
         entity.player = null;
         entity.position = null;
@@ -20,6 +21,7 @@ export class Entity {
     components: ComponentType;
     bullet: Bullet | null;
     damage: Damage | null;
+    enemy: Enemy | null;
     health: Health | null;
     player: Player | null;
     position: Position | null;

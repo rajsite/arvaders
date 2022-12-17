@@ -1,14 +1,15 @@
 import { Entity } from './entity';
 import { ComponentType } from "./components/types";
-import {Bullet, Damage, Health, Player, Position, Ship, Visual} from './components';
+import {Bullet, Damage, Enemy, Health, Player, Position, Ship, Visual} from './components';
 import { Pool } from './utilities/pool';
 import { Query } from './query';
 
-const MAX_CAPACITY = 150;
+const MAX_CAPACITY = 120;
 
 const entityPool = new Pool<Entity>(MAX_CAPACITY, Entity.create, Entity.reset);
 const bulletPool = new Pool<Bullet>(MAX_CAPACITY, Bullet.create, Bullet.reset);
 const damagePool = new Pool<Damage>(MAX_CAPACITY, Damage.create, Damage.reset);
+const enemyPool = new Pool<Enemy>(MAX_CAPACITY, Enemy.create, Enemy.reset);
 const healthPool = new Pool<Health>(MAX_CAPACITY, Health.create, Health.reset);
 const playerPool = new Pool<Player>(MAX_CAPACITY, Player.create, Player.reset);
 const positionPool = new Pool<Position>(MAX_CAPACITY, Position.create, Position.reset);
@@ -26,6 +27,7 @@ export function resetEntities (capacity: i32): void {
     entityPool.reset(capacity);
     bulletPool.reset(capacity);
     damagePool.reset(capacity);
+    enemyPool.reset(capacity);
     healthPool.reset(capacity);
     playerPool.reset(capacity);
     positionPool.reset(capacity);
@@ -42,6 +44,10 @@ export function allocateEntity (components: ComponentType): Entity {
 
     if (components & ComponentType.damage) {
         entity.damage = damagePool.allocate();
+    }
+
+    if (components & ComponentType.enemy) {
+        entity.enemy = enemyPool.allocate();
     }
 
     if (components & ComponentType.health) {

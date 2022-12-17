@@ -1,5 +1,6 @@
 export * from './bullet';
 export * from './damage';
+export * from './enemy';
 export * from './health';
 export * from './player';
 export * from './position';

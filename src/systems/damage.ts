@@ -21,6 +21,10 @@ export function damage(): void {
             ) {
                 hurtEntity.health!.value -= damageEntity.damage!.value;
 
+                if (hurtEntity.health!.value <= 0) {
+                    hurtEntity.exists = false;
+                }
+
                 // Damage like a bee, sting once and gone
                 damageEntity.exists = false;
                 break;

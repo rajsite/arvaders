@@ -6,8 +6,4 @@ export class Health {
         health.value = 0;
     }
     value: i32;
-
-    isAlive (): boolean {
-        return this.value > 0;
-    }
 }
