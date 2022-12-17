@@ -1,12 +1,22 @@
-import { trace } from "../wasm4";
+import * as w4 from '../wasm4';
 import * as scenes from './';
 import { Scene } from "./types";
 
 class Lose extends Scene {
+    private ticks: i32 = 0;
+    private readonly maxTicks: i32 = 120;
+
     run(): Scene {
-        trace(this.name);
-        return scenes.level1Start;
+        this.ticks++;
+        store<u16>(w4.DRAW_COLORS, 0x002);
+        w4.text('You lose! :(', 16, 90);
+    
+        if (this.ticks > this.maxTicks) {
+            this.ticks = 0;
+            return scenes.level1Start;
+        }
+
+        return lose;
     }
 }
-
-export const lose = new Lose('lose', false);
+export const lose = new Lose('lose', true);

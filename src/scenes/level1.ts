@@ -9,6 +9,7 @@ import { Condition } from '../systems';
 import * as scenes from '.';
 import { Scene } from "./types";
 import * as gamepad from '../utilities/gamepad';
+import { SCREEN_SIZE } from "../utilities/screen";
 
 class Level1Start extends Scene {
     run(): Scene {
@@ -23,7 +24,7 @@ class Level1Start extends Scene {
         );
         initializeVisualPosition(player, images.player);
         player.position!.x = 0;
-        player.position!.y = w4.SCREEN_SIZE - player.position!.height;
+        player.position!.y = SCREEN_SIZE - player.position!.height;
         player.position!.vx = 8;
         player.position!.vy = 0;
         player.position!.movement = movements.gamepadLeftRight;
