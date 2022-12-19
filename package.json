@@ -13,6 +13,7 @@
   "devDependencies": {
     "assemblyscript": "^0.20.14",
     "concurrently": "^7.6.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "wasm4": "^2.5.3"
   }
 }
