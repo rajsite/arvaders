@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "asc --target release",
+    "build": "asc --target release && w4 bundle --html build/index.html build/cart.wasm",
     "build:debug": "asc --target debug",
     "build:watch": "nodemon",
     "w4:run": "w4 watch build/cart.wasm",
