@@ -12,7 +12,7 @@ import { SCREEN_SIZE } from "../utilities/screen";
 
 class Level1Start extends Scene {
     run(): Scene {
-        world.resetEntities(5);
+        world.resetEntities(15);
 
         const player = world.allocateEntity(
             ComponentType.player |
@@ -34,7 +34,8 @@ class Level1Start extends Scene {
             ComponentType.ship |
             ComponentType.position |
             ComponentType.visual | 
-            ComponentType.health
+            ComponentType.health |
+            ComponentType.attack
         );
         initializeVisualPosition(enemy, images.invader);
         enemy.position!.x = 0;
@@ -42,6 +43,7 @@ class Level1Start extends Scene {
         enemy.position!.vx = 2;
         enemy.position!.movement = movements.sideToSide;
         enemy.health!.value = 100;
+        enemy.attack!.attackInterval = 40;
     
         for (let i = 0; i < 3; i++) {
             const bullet = world.allocateEntity(
@@ -51,11 +53,26 @@ class Level1Start extends Scene {
                 ComponentType.visual | 
                 ComponentType.damage
             );
-            initializeVisualPosition(bullet, images.enemyBullet);
+            initializeVisualPosition(bullet, images.playerBullet);
             bullet.exists = false;
             bullet.position!.movement = movements.forwardToAstral;
             bullet.damage!.value = 50;
             bullet.position!.vy = -2;
+        }
+
+        for (let i = 0; i < 10; i++) {
+            const bullet = world.allocateEntity(
+                ComponentType.enemy |
+                ComponentType.bullet |
+                ComponentType.position |
+                ComponentType.visual | 
+                ComponentType.damage
+            );
+            initializeVisualPosition(bullet, images.enemyBullet);
+            bullet.exists = false;
+            bullet.position!.movement = movements.forwardToAstral;
+            bullet.damage!.value = 50;
+            bullet.position!.vy = 2;
         }
     
         return scenes.level1Update;
@@ -68,6 +85,7 @@ class Level1Update extends Scene {
         systems.damage();
         systems.move();
         systems.playerFire();
+        systems.enemyFire();
         systems.render();
         const condition = systems.condition();
         if (condition === Condition.win) {
