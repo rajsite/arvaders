@@ -8,7 +8,6 @@ import * as w4 from "../wasm4";
 import { Condition } from '../systems';
 import * as scenes from '.';
 import { Scene } from "./types";
-import * as gamepad from '../utilities/gamepad';
 import { SCREEN_SIZE } from "../utilities/screen";
 
 class Level1Start extends Scene {
@@ -66,7 +65,6 @@ export const level1Start = new Level1Start('level1Start', false);
 
 class Level1Update extends Scene {
     run(): Scene {
-        gamepad.update();
         systems.damage();
         systems.move();
         systems.playerFire();

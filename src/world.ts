@@ -1,19 +1,15 @@
 import { Entity } from './entity';
 import { ComponentType } from "./components/types";
-import {Bullet, Damage, Enemy, Health, Player, Position, Ship, Visual} from './components';
+import {Damage, Health, Position, Visual} from './components';
 import { Pool } from './utilities/pool';
 import { Query } from './query';
 
-const MAX_CAPACITY = 120;
+const MAX_CAPACITY = 250;
 
 const entityPool = new Pool<Entity>(MAX_CAPACITY, Entity.create, Entity.reset);
-const bulletPool = new Pool<Bullet>(MAX_CAPACITY, Bullet.create, Bullet.reset);
 const damagePool = new Pool<Damage>(MAX_CAPACITY, Damage.create, Damage.reset);
-const enemyPool = new Pool<Enemy>(MAX_CAPACITY, Enemy.create, Enemy.reset);
 const healthPool = new Pool<Health>(MAX_CAPACITY, Health.create, Health.reset);
-const playerPool = new Pool<Player>(MAX_CAPACITY, Player.create, Player.reset);
 const positionPool = new Pool<Position>(MAX_CAPACITY, Position.create, Position.reset);
-const shipPool = new Pool<Ship>(MAX_CAPACITY, Ship.create, Ship.reset);
 const visualPool = new Pool<Visual>(MAX_CAPACITY, Visual.create, Visual.reset);
 
 // Pre-allocate the max possible set of entities and components
@@ -25,45 +21,26 @@ export const query2 = new Query(entityPool);
 
 export function resetEntities (capacity: i32): void {
     entityPool.reset(capacity);
-    bulletPool.reset(capacity);
     damagePool.reset(capacity);
-    enemyPool.reset(capacity);
     healthPool.reset(capacity);
-    playerPool.reset(capacity);
     positionPool.reset(capacity);
-    shipPool.reset(capacity);
     visualPool.reset(capacity);
 }
 
 export function allocateEntity (components: ComponentType): Entity {
     const entity = entityPool.allocate();
     entity.components = components;
-    if (components & ComponentType.bullet) {
-        entity.bullet = bulletPool.allocate();
-    }
 
     if (components & ComponentType.damage) {
         entity.damage = damagePool.allocate();
-    }
-
-    if (components & ComponentType.enemy) {
-        entity.enemy = enemyPool.allocate();
     }
 
     if (components & ComponentType.health) {
         entity.health = healthPool.allocate();
     }
 
-    if (components & ComponentType.player) {
-        entity.player = playerPool.allocate();
-    }
-
     if (components & ComponentType.position) {
         entity.position = positionPool.allocate();
-    }
-
-    if (components & ComponentType.ship) {
-        entity.ship = shipPool.allocate();
     }
 
     if (components & ComponentType.visual) {

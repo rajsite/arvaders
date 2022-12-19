@@ -1,10 +1,13 @@
 import { tick} from './utilities/tick';
 import { Scene } from './scenes/types';
 import * as scenes from './scenes';
+import * as gamepad from './utilities/gamepad';
+
 
 let scene: Scene = scenes.init;
 
 export function update (): void {
+    gamepad.update();
     tick(0,0);
     runScene();
 }
