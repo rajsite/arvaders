@@ -44,8 +44,6 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: './build'
-      - name: Test 
-        run: npm run test
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Deploy to GitHub Pages
