@@ -40,10 +40,10 @@ jobs:
         run: npm ci
       - name: Build 
         run: npm run build
-      - name: Build GBA 
-        run: |
-          docker build -t test1 .
-          docker run -v $PWD/build:/mydata --rm -it test1 ./build.sh -f wasm2c /mydata/cart.wasm gba /mydata/cart
+      - name: Build GBA ENV
+        run: docker build -t test1 .
+      - name: Build GBA ROM 
+        run: docker run -v $PWD/build:/mydata --rm -it test1 ./build.sh -f wasm2c /mydata/cart.wasm gba /mydata/cart
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
