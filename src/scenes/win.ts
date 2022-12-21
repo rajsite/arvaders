@@ -1,6 +1,8 @@
 import * as w4 from '../wasm4';
 import * as scenes from './';
 import { Scene } from "./types";
+import * as images from '../images';
+import { SCREEN_SIZE } from '../utilities/screen';
 
 class Win extends Scene {
     private ticks: i32 = 0;
@@ -9,7 +11,11 @@ class Win extends Scene {
     run(): Scene {
         this.ticks++;
         store<u16>(w4.DRAW_COLORS, 0x002);
-        w4.text('You win! :)', 16, 90);
+
+        images.win.draw(
+            SCREEN_SIZE/2 - images.win.width/2,
+            SCREEN_SIZE/2 - images.win.height/2
+        );
     
         if (this.ticks > this.maxTicks) {
             this.ticks = 0;
