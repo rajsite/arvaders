@@ -12,7 +12,7 @@ import { SCREEN_SIZE } from "../utilities/screen";
 
 class Level1Start extends Scene {
     run(): Scene {
-        world.resetEntities(15);
+        world.resetEntities(18);
 
         const player = world.allocateEntity(
             ComponentType.player |
@@ -28,22 +28,25 @@ class Level1Start extends Scene {
         player.position!.vy = 0;
         player.position!.movement = movements.gamepadLeftRight;
         player.health!.value = 100;
-    
-        const enemy = world.allocateEntity(
-            ComponentType.enemy |
-            ComponentType.ship |
-            ComponentType.position |
-            ComponentType.visual | 
-            ComponentType.health |
-            ComponentType.attack
-        );
-        initializeVisualPosition(enemy, images.invader);
-        enemy.position!.x = 0;
-        enemy.position!.y = 0;
-        enemy.position!.vx = 2;
-        enemy.position!.movement = movements.sideToSide;
-        enemy.health!.value = 100;
-        enemy.attack!.attackInterval = 40;
+
+        for (let i = 0; i < 4; i++) {
+            const enemy = world.allocateEntity(
+                ComponentType.enemy |
+                ComponentType.ship |
+                ComponentType.position |
+                ComponentType.visual | 
+                ComponentType.health |
+                ComponentType.attack
+            );
+            initializeVisualPosition(enemy, images.invader);
+            enemy.position!.x = ((enemy.position!.width + 10) * i);  
+            enemy.position!.y = 0;
+            enemy.position!.vx = 2;
+            enemy.position!.movement = movements.sideToSide;
+            enemy.health!.value = 100;
+            enemy.attack!.attackInterval = 50;
+            enemy.attack!.lastAttack = i * 20 + i;
+        }
     
         for (let i = 0; i < 3; i++) {
             const bullet = world.allocateEntity(

@@ -17,7 +17,11 @@ export function damage(): void {
         for (let j = 0; j < hurtEntities.count; j++) {
             const hurtEntity = hurtEntities.matches[j];
             if (
-                damageEntity.position!.intersects(hurtEntity.position!)
+                (
+                    (damageEntity.components & ComponentType.player) === (hurtEntity.components & ComponentType.enemy)
+                    || (damageEntity.components & ComponentType.enemy) === (hurtEntity.components & ComponentType.player)
+                )
+                && damageEntity.position!.intersects(hurtEntity.position!)
             ) {
                 hurtEntity.health!.value -= damageEntity.damage!.value;
 

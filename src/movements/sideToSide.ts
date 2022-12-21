@@ -17,5 +17,9 @@ export const sideToSide: Movement = (entity: Entity): void => {
     if (entity.position!.x === 0 || 
         entity.position!.x === SCREEN_SIZE - entity.position!.width) {
         entity.position!.vx = -1 * entity.position!.vx;
+        entity.position!.y += entity.position!.height;
+    }
+    if (entity.position!.y + entity.position!.height > SCREEN_SIZE) {
+        entity.position!.y = 0;
     }
 }
