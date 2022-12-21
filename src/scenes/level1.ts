@@ -21,7 +21,7 @@ class Level1Start extends Scene {
             ComponentType.visual | 
             ComponentType.health
         );
-        initializeVisualPosition(player, images.player);
+        initializeVisualPosition(player, images.smiley);
         player.position!.x = 0;
         player.position!.y = SCREEN_SIZE - player.position!.height;
         player.position!.vx = 8;
@@ -38,7 +38,7 @@ class Level1Start extends Scene {
                 ComponentType.health |
                 ComponentType.attack
             );
-            initializeVisualPosition(enemy, images.invader);
+            initializeVisualPosition(enemy, images.smiley);
             enemy.position!.x = ((enemy.position!.width + 10) * i);  
             enemy.position!.y = 0;
             enemy.position!.vx = 2;
