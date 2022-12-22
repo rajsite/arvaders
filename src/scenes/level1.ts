@@ -4,7 +4,6 @@ import * as images from '../images';
 import * as systems from '../systems';
 import * as movements from '../movements';
 import { initializeVisualPosition } from '../initializers';
-import * as w4 from "../wasm4";
 import { Condition } from '../systems';
 import * as scenes from '.';
 import { Scene } from "./types";
@@ -96,7 +95,7 @@ class Level1Update extends Scene {
         systems.render();
         const condition = systems.condition();
         if (condition === Condition.win) {
-            return scenes.level1End;
+            return scenes.win;
         } else if (condition === Condition.lose) {
             return scenes.lose;
         }
@@ -105,12 +104,3 @@ class Level1Update extends Scene {
 }
 
 export const level1Update = new Level1Update('level1Update', true);
-
-class Level1End extends Scene {
-    run(): Scene {
-        w4.trace(this.name);
-        return scenes.win;
-    }
-}
-
-export const level1End = new Level1End('level1End', false);
