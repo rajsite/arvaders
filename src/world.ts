@@ -5,7 +5,7 @@ import { Pool } from './utilities/pool';
 import { Query } from './query';
 import { Attack } from './components/attack';
 
-const MAX_CAPACITY = 200;
+const MAX_CAPACITY = 150;
 
 const entityPool = new Pool<Entity>(MAX_CAPACITY, Entity.create, Entity.reset);
 const attackPool = new Pool<Attack>(MAX_CAPACITY, Attack.create, Attack.reset);

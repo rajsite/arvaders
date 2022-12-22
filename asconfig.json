@@ -23,6 +23,16 @@
       "noAssert": true,
       "use": "abort="
     },
+    "gba": {
+      "optimizeLevel": 3,
+      "shrinkLevel": 1,
+      "noAssert": true,
+      "use": [
+        "abort=",
+        "TIME_SCALE=4"
+      ],
+      "outFile": "build/cart.timescale.wasm"
+    },
     "debug": {
       "debug": true,
       "sourceMap": "http://localhost:4444/cart.wasm.map",

@@ -3,11 +3,12 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "asc --target release && w4 bundle --html build/index.html build/cart.wasm",
+    "build": "asc --target release && w4 bundle --html build/index.html build/cart.wasm && asc --target gba",
     "build:debug": "asc --target debug",
     "build:watch": "nodemon",
-    "w4:run": "w4 watch build/cart.wasm",
-    "w4:watch": "w4 watch build/cart.wasm",
+    "w4:run": "w4 run build/cart.wasm",
+    "w4:run:timescale": "w4 run build/cart.timescale.wasm",
+    "w4:watch": "w4 watch",
     "dev": "concurrently \"npm:*:watch\""
   },
   "devDependencies": {

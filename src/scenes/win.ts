@@ -3,10 +3,11 @@ import * as scenes from './';
 import { Scene } from "./types";
 import * as images from '../images';
 import { SCREEN_SIZE } from '../utilities/screen';
+import { scaleTime } from '../utilities/time';
 
 class Win extends Scene {
     private ticks: i32 = 0;
-    private readonly maxTicks: i32 = 120;
+    private readonly maxTicks: i32 = scaleTime(60);
 
     run(): Scene {
         this.ticks++;

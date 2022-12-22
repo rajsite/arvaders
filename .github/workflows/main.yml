@@ -44,6 +44,8 @@ jobs:
         run: docker build -t test1 .
       - name: Build GBA ROM 
         run: docker run -v $PWD/build:/mydata --rm test1 ./build.sh -f wasm2c /mydata/cart.wasm gba /mydata/cart
+      - name: Build GBA ROM Time Scale
+        run: docker run -v $PWD/build:/mydata --rm test1 ./build.sh -f wasm2c /mydata/cart.timescale.wasm gba /mydata/cart.timescale
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

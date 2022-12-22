@@ -9,6 +9,7 @@ import { Condition } from '../systems';
 import * as scenes from '.';
 import { Scene } from "./types";
 import { SCREEN_SIZE } from "../utilities/screen";
+import { scaleVelocity } from "../utilities/time";
 
 class Level1Start extends Scene {
     run(): Scene {
@@ -24,8 +25,8 @@ class Level1Start extends Scene {
         initializeVisualPosition(player, images.player);
         player.position!.x = 0;
         player.position!.y = SCREEN_SIZE - player.position!.height;
-        player.position!.vx = 8;
-        player.position!.vy = 0;
+        player.position!.vx = scaleVelocity(4);
+        player.position!.vy = scaleVelocity(0);
         player.position!.movement = movements.gamepadLeftRight;
         player.health!.value = 100;
 
@@ -41,7 +42,8 @@ class Level1Start extends Scene {
             initializeVisualPosition(enemy, images.invader);
             enemy.position!.x = ((enemy.position!.width + 10) * i);  
             enemy.position!.y = 0;
-            enemy.position!.vx = 2;
+            enemy.position!.vx = scaleVelocity(1);
+            enemy.position!.vy = scaleVelocity(0);
             enemy.position!.movement = movements.sideToSide;
             enemy.health!.value = 100;
             enemy.attack!.attackInterval = 50;
@@ -60,7 +62,8 @@ class Level1Start extends Scene {
             bullet.exists = false;
             bullet.position!.movement = movements.forwardToAstral;
             bullet.damage!.value = 50;
-            bullet.position!.vy = -2;
+            bullet.position!.vx = scaleVelocity(0);
+            bullet.position!.vy = scaleVelocity(-2);
         }
 
         for (let i = 0; i < 10; i++) {
@@ -75,7 +78,8 @@ class Level1Start extends Scene {
             bullet.exists = false;
             bullet.position!.movement = movements.forwardToAstral;
             bullet.damage!.value = 50;
-            bullet.position!.vy = 2;
+            bullet.position!.vy = scaleVelocity(0);
+            bullet.position!.vy = scaleVelocity(2);
         }
     
         return scenes.level1Update;
