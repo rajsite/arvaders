@@ -47,9 +47,9 @@ jobs:
           git checkout 529c3e92aa0a680331a0456dc6b66d0abdc04443
           docker build -t wasm4-aot-image .
       - name: Build GBA ROM 
-        run: docker run -v $PWD/build:/pwd_dir --rm wasm4-aot-image ./build.sh -f wasm2c /pwd_dir/cart.wasm gba /pwd_dir/cart
+        run: docker run -v $PWD/build:/pwd_dir --rm wasm4-aot-image ./build.sh -a RAJSITE -n ARVADERS -f wasm2c /pwd_dir/cart.wasm gba /pwd_dir/cart
       - name: Build GBA ROM Time Scale
-        run: docker run -v $PWD/build:/pwd_dir --rm wasm4-aot-image ./build.sh -f wasm2c /pwd_dir/cart.timescale.wasm gba /pwd_dir/cart.timescale
+        run: docker run -v $PWD/build:/pwd_dir --rm wasm4-aot-image ./build.sh -a RAJSITE -n ARVADERS -f wasm2c /pwd_dir/cart.timescale.wasm gba /pwd_dir/cart.timescale
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
