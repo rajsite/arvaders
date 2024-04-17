@@ -29,11 +29,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
       - name: Install npm dependencies
@@ -51,11 +51,11 @@ jobs:
       - name: Build GBA ROM Time Scale
         run: docker run -v $PWD/build:/pwd_dir --rm wasm4-aot-image ./build.sh -a RAJSITE -n ARVADERS -f wasm2c /pwd_dir/cart.timescale.wasm gba /pwd_dir/cart.timescale
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './build'
       - name: Setup Pages
-        uses: actions/configure-pages@v2
+        uses: actions/configure-pages@v5
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
